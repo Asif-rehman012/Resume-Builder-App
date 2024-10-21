@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link media = "all" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+    <link rel="stylesheet" href="styles.css">
+    <title>Resume Builder app</title>
+
+    
+    
+</head>
+<body style="background-color: rgb(149, 228, 228); font-family: Arial, Helvetica, sans-serif;" >
+    <div class="container" id = "cv-form">
+        <h1 class="text-center my-3" style="background-color: aqua;">Resume Generator</h1>
+        <p class="text-center"></p>
+        <div class="row">
+            <div class="col-md-6 col-sm-6 ">
+                <h3>Personal Information</h3>
+                <div class="form-group mt-2">
+                    <label for="name">Your Full-Name *</label>
+                    <input type="text" id ="name" class="form-control" placeholder="Enter Here">
+                </div>
+                <div class="form-group mt-2">
+                    <label for="contact">Your Contact*</label>
+                    <input type="number" id ="contact" class="form-control" placeholder="Enter Here" max="10">
+                </div>
+                <div class="form-group mt-2">
+                    <label for="address">Your Address*</label>
+                    <textarea type="text" id ="address" class="form-control" placeholder="Enter Here" rows="5"></textarea>
+                </div>
+                <div class="form-group mt-3">
+                    <label for="pic">Upload your picture</label>
+                    <input type="file" name="pic" id="imgField" class="form-control">
+                </div>
+                <p class="text-secondary mt-3">Important Links</p>
+                <div class="form-group mt-2">
+                    <label for="fb">Facebook</label>
+                    <input type="url" id ="fb" class="form-control" placeholder="https://example.com" pattern="https://.*">
+                </div>
+                <div class="form-group mt-2">
+                    <label for="insta">Instagram</label>
+                    <input type="url" id ="insta" class="form-control" placeholder="https://example.com" pattern="https://.*">
+                </div>
+                <div class="form-group mt-2">
+                    <label for="linked">LinkedIn</label>
+                    <input type="url" id ="linked" class="form-control" placeholder="https://example.com" pattern="https://.*">
+                </div>
+            </div>
+            <div class="col-md-6 col-sm-6">
+                <h3>Professional Information</h3>
+                <div class="form-group mt-2">
+                    <label for="obj">Objective*</label>
+                    <textarea type="text" id ="objective" class="form-control" placeholder="Enter Here" rows="5"></textarea>
+                </div>
+                <div class="form-group mt-2" id ="WE">
+                    <label for="work">Work Experience</label>
+                    <textarea type="text" id ="workExp" class="form-control we" placeholder="Enter Here" rows="3"></textarea>
+                    <div class="container text-center mt-2" id="weAdd">
+                        <button class="btn btn-primary btn-sm" onclick="addWE()">Add</button>
+                    </div>
+                </div>
+                
+                <div class="form-group mt-2" id="AQ">
+                    <label for="aca">Academic Qualifications*</label>
+                    <textarea type="text" id ="aca" class="form-control aq" placeholder="Enter Here" rows="3"></textarea>
+                    <div class="container text-center mt-2" id="aqAdd">
+                        <button class="btn btn-primary btn-sm" onclick="addAQ()">Add</button>
+                    </div>
+                </div>
+                <div class="form-group mt-2" id="PR">
+                    <label for="pro">Projects</label>
+                    <textarea type="text" id ="pro" class="form-control pr" placeholder="Enter Here" rows="3"></textarea>
+                    <div class="container text-center mt-2" id="prAdd">
+                        <button class="btn btn-primary btn-sm" onclick="addPR()">Add</button>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        <div class="container text-center mt-4">
+            <button class="btn btn-primary btn-lg mb-2" onclick="generateCV()">
+                Generate CV
+            </button>
+        </div>
+    </div>
+    
+    <!--Template-->
+    <div class="container" id="cv-template">
+        <div class="row">
+            <div class="col-md-4 col-sm-4 text-center py-5 background">
+                <img
+                src="data:image/png;base64,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"
+                alt=""
+                id="my-img" 
+                class="img-fluid">
+                <div class="container">
+                    <p id="nameT1">Name</p>
+                    <p id="contactT">Contact</p>
+                    <p id="addressT">Address</p>
+
+                    <hr>
+                    
+                    <p id="fbT1"><a id="fbT" href="#1">Facebook</a></p>
+                    <p id="instaT1"><a id="instaT" href="#1">Instagram</a></p>
+                    <p id="linkedT1"><a id="linkedT" href="#1">LinkedIn</a></p>
+                </div>
+            </div>
+            
+            <div class="col-md-8 col-sm-8 py-5">
+                <h1 class="text-center" id="nameT2">Name</h1>
+                <!--Objective-->
+                <div class="card mt-4">
+                    <div class="card-header">
+                        <h3>Objective</h3>
+                    </div>
+                    <div class="card-body">
+                        <p id="objectiveT">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolores in velit quidem nostrum quod enim! Quisquam odit sint at laudantium. Accusamus, illo deleniti ratione minima dolorum sit quam tempore placeat.</p>
+                    </div>
+                </div>
+                
+                <!--Work-->
+                <div class="card mt-4" id = "cv_work">
+                    <div class="card-header">
+                        <h3>Work Experience</h3>
+                    </div>
+                    <div class="card-body">
+                        <ul id="workT">
+                            <li>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Sint, eaque!</li>
+                            <li>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Sint, eaque!</li>
+                            <li>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Sint, eaque!</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!--Academic Qualification-->
+                <div class="card mt-4">
+                    <div class="card-header">
+                        <h3>Academic Qualification</h3>
+                    </div>
+                    <div class="card-body">
+                        <ul id="academicT">
+                            <li>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Sint, eaque!</li>
+                            <li>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Sint, eaque!</li>
+                            <li>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Sint, eaque!</li>                        
+                        </ul>
+                    </div>
+                </div>
+                <div class="card mt-4" id="cv_project">
+                    <div class="card-header">
+                        <h3>Project</h3>
+                    </div>
+                    <div class="card-body">
+                        <ul id="projectT">
+                            <li>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Sint, eaque!</li>
+                            <li>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Sint, eaque!</li>
+                            <li>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Sint, eaque!</li>                        
+                        </ul>
+                    </div>
+                </div>
+                <div class="container mt-3 text-center">
+                    <button class="btn background" onclick="printCV()" id="print">Print</button>
+                </div>
+            </div>      
+        </div>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
+    <script src="script.js"></script>
+</body>
+</html>
